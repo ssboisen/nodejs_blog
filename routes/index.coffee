@@ -1,5 +1,5 @@
 repo = require '../modules/blog_repo'
-
+_ = require 'underscore'
 
 sleep = (milliSeconds) ->
     startTime = new Date().getTime();
@@ -7,13 +7,20 @@ sleep = (milliSeconds) ->
 
 
 exports.index = (req, res) ->
-    repo.posts.get_latest \
+    repo.posts.get_all \
     (() -> console.log "no documents received"), 
-    ((latest_post) ->
-      res.render('index',
-      {
-        title: "ssboisen blog > home"
-        post_title: latest_post.title,
-        post_date: latest_post.post_date
-        post_body: latest_post.body
-      }))
+    ((posts) ->
+      vm = { title: "ssboisen"}
+      vm.posts = _.map(posts, (post) ->
+        {
+          title: post.title,
+          date: post.post_date
+          body: post.body
+        })
+
+      res.render('index', vm)
+    )
+
+exports.about = (req, res) ->
+  vm = { title: "ssboisen > about" }
+  res.render('about', vm)

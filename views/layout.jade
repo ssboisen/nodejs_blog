@@ -2,5 +2,31 @@
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body!= body
+    link(rel='stylesheet', href='/css/bootstrap.css')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.css')
+    style
+      body { padding-top: 60px }
+
+    body
+      div.navbar.navbar-fixed-top
+        div.navbar-inner
+          div.container
+            a(data-toggle='collapse',data-target='.nav-collapse').btn.btn-navbar
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+                a(href='/').brand #{title}
+                div.nav-collapse
+                  ul.nav
+                    li.active
+                      a(href='/') Blog
+                    li
+                      a(href='/about') About
+                    li
+                      a(href='/contact') Contact
+
+      div.container!= body
+        footer
+          p &copy; Simon Skov Boisen 2012
+        
+      script(src='/js/bootstrap.js')

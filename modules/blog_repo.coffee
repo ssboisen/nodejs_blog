@@ -8,11 +8,11 @@ db = mongojs.connect connection_string, collections
 
 exports.posts = {}
 
-exports.posts.get_all = (got_nothing, for_each) ->
-                          db.posts.find().forEach (err, doc) ->
+exports.posts.get_all = (got_nothing, get_all_docs) ->
+                          db.posts.find (err, docs) ->
                             console.log err if err?
-                            if doc
-                              for_each(doc)
+                            if docs
+                              get_all_docs(docs)
                             else
                               got_nothing()
 
